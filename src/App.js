@@ -8,6 +8,7 @@ import {
   TextField,
   Button,
   IconButton,
+  Grid,
   Paper
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -54,7 +55,7 @@ export default function App() {
           elevation={3}
           style={{
             padding: 15,
-            minWidth: 190,
+            minWidth: 150,
             backgroundColor: "#32a692",
             textAlign: "left"
           }}
@@ -84,67 +85,77 @@ export default function App() {
     >
       <div className="input-section">
         <form onSubmit={add}>
-          <TextField
-            placeholder="Type Here"
-            variant="outlined"
-            color="primary"
-            value={temp}
-            error={error}
-            helperText={helper}
-            onChange={(e) => {
-              error ? setError(false) : setError(false);
-              setHelper("");
-              setTemp(e.target.value);
-            }}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ padding: 15, marginLeft: 5 }}
-            onClick={add}
-          >
-            Add
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            style={{ padding: 15, marginLeft: 5 }}
-            onClick={() => {
-              setDial(true);
-            }}
-          >
-            Clear
-          </Button>
+          <Grid container justify="center" spacing={3}>
+            <Grid item xs={12}>
+              <h1 style={{ fontFamily: "cursive", color: "#32a692" }}>
+                Todo App
+              </h1>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                placeholder="Type Here"
+                variant="outlined"
+                color="primary"
+                value={temp}
+                error={error}
+                helperText={helper}
+                onChange={(e) => {
+                  error ? setError(false) : setError(false);
+                  setHelper("");
+                  setTemp(e.target.value);
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ padding: 15 }}
+                onClick={add}
+              >
+                Add
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                style={{ padding: 15, marginLeft: 5 }}
+                onClick={() => {
+                  setDial(true);
+                }}
+              >
+                Clear
+              </Button>
+            </Grid>
+          </Grid>
         </form>
       </div>
-
-      <Paper
-        className="container"
-        elevation={3}
-        style={{
-          backgroundColor: "gray",
-          minWidth: 230,
-          height: "90vh",
-          margin: 10,
-          marginLeft: 20,
-          marginRight: 20
-        }}
-      >
-        <FlipMove
-          className="display-section"
-          style={{
-            height: 890,
-            marginTop: 5,
-            padding: 20
-          }}
-          duration={150}
-          easing="ease-out"
-        >
-          {task.map((x) => {
-            return display(x);
-          })}
-        </FlipMove>
-      </Paper>
+      <Grid container spaicng={3} alignItems="center" justify="center">
+        <Grid item xs={10} md={6} lg={4}>
+          <Paper
+            className="container"
+            elevation={3}
+            style={{
+              backgroundColor: "gray"
+            }}
+          >
+            <FlipMove
+              className="display-section"
+              style={{
+                height: "73vh",
+                marginTop: 5,
+                overflow: "auto",
+                padding: 10
+              }}
+              duration={150}
+              easing="ease-out"
+            >
+              {task.map((x) => {
+                return display(x);
+              })}
+            </FlipMove>
+          </Paper>
+        </Grid>
+      </Grid>
       <Dialog
         open={dial}
         onClose={() => {

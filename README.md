@@ -1,2 +1,2 @@
 # TodoApp
-Created with CodeSandbox
+a simple todo app with react
